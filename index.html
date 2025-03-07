@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی کلیک روی سکه</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            background-color: #00BFFF; /* رنگ آبی پیش‌فرض */
+        }
+
+        #coin {
+            width: 100px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>امتیاز: <span id="score">0</span></h1>
+    <img src="333.jpg" id="coin" alt="Coin"> <!-- تصویر سکه اصلی -->
+    
+    <script>
+        let score = 0;
+
+        document.getElementById("coin").addEventListener("click", function(event) {
+            score += 10;  // افزایش امتیاز با هر کلیک
+            const scoreElement = document.getElementById("score");
+            scoreElement.textContent = score; // نمایش امتیاز
+        });
+
+        let coin = document.getElementById("coin");
+        let coinPositionX = 50; // موقعیت افقی سکه (در درصد)
+        let coinPositionY = 250; // موقعیت عمودی سکه
+
+        // تنظیم حرکت سکه با دکمه‌های صفحه‌کلید
+        document.addEventListener("keydown", function(event) {
+            const moveAmount = 10; // مقدار حرکت سکه در هر بار فشار دادن دکمه
+
+            if (event.key === "ArrowUp") {
+                coinPositionY += moveAmount;  // حرکت به سمت بالا
+                coin.style.bottom = `${coinPositionY}px`;
+            } else if (event.key === "ArrowDown") {
+                coinPositionY -= moveAmount;  // حرکت به سمت پایین
+                coin.style.bottom = `${coinPositionY}px`;
+            } else if (event.key === "ArrowLeft") {
+                coinPositionX -= moveAmount;  // حرکت به سمت چپ
+                coin.style.left = `${coinPositionX}%`;
+            } else if (event.key === "ArrowRight") {
+                coinPositionX += moveAmount;  // حرکت به سمت راست
+                coin.style.left = `${coinPositionX}%`;
+            }
+        });
+    </script>
+</body>
+</html>
